@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>City of Gambits - Victory Point Tracker</title>
+
+  <style>
+    body{overflow:hidden;}
+
+.mainParent{
+  position: fixed;  /* Ensures it stays in place */
+  top: 0;
+  left: 0;
+  width: 100vw;  /* 100% of viewport width */
+  height: 100vh; /* 100% of viewport height */
+  background-color: black; /* Just for visibility */
+  color: black;
+}
+.player{background-color:#d8d3c0;
+position:relative;
+height:50%}
+.player:first-of-type{background-color:#d3a673;
+rotate:180deg}
+.life{
+    position:absolute;
+    top:50%;
+    left:50%;
+    font-size:25vh;
+    transform: translate(-50%, -50%); /* Moves back by half its width & height */
+    z-index:2;
+}
+.modibutton{
+  position:relative;
+  height:100%;
+  width:49%;
+  background:transparent;
+  border:none;
+  font-size:10vh;
+  color:#45454545;
+  }
+
+  </style>
+
+  
+</head>
+<body>
+  <div class=mainParent>
+  <div class="player" id="player1">
+        
+        <div class="life" id="life1">0</div>
+        <button class=modibutton onclick="changeLife(1, -1)">-</button>
+        <button class=modibutton onclick="changeLife(1, 1)">+</button>
+    </div>
+    <div class="player" id="player2">
+        
+        <div class="life" id="life2">0</div>
+        <button class=modibutton onclick="changeLife(2, -1)">-</button>
+        <button class=modibutton onclick="changeLife(2, 1)">+</button>
+    </div>
+</div>
+
+  <script>
+    function changeLife(player, amount) {
+            let lifeElement = document.getElementById(`life${player}`);
+            let currentLife = parseInt(lifeElement.innerText);
+            lifeElement.innerText = currentLife + amount;
+        }
+  </script>
+</body>
+</html>
