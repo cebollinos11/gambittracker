@@ -48,7 +48,22 @@ rotate:180deg}
   font-size:10vh;
   color:#45454545;
   }
+  .reset-button {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
 
+        .reset-button img {
+            width: 50px;
+            height: 50px;
+            opacity: 0.45;
+        }
   </style>
 
   
@@ -67,14 +82,24 @@ rotate:180deg}
         <button class=modibutton onclick="changeLife(2, -1)">-</button>
         <button class=modibutton onclick="changeLife(2, 1)">+</button>
     </div>
+    <button class="reset-button" onclick="resetGame()">
+      <img src="reset-icon.png" alt="Reset">
+  </button>
 </div>
-
   <script>
     function changeLife(player, amount) {
             let lifeElement = document.getElementById(`life${player}`);
             let currentLife = parseInt(lifeElement.innerText);
             lifeElement.innerText = currentLife + amount;
         }
+
+      function resetGame() {
+          let confirmReset = confirm("Do you want to reset the game?");
+          if (confirmReset) {
+              document.getElementById("life1").innerText = "0";
+              document.getElementById("life2").innerText = "0";
+          }
+      }
   </script>
 </body>
 </html>
