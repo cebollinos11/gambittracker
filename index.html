@@ -86,11 +86,23 @@ rotate:180deg}
       <img src="reset-icon.png" alt="Reset">
   </button>
 </div>
+<audio id="increaseSound" src="coin.mp3"></audio>
   <script>
     function changeLife(player, amount) {
             let lifeElement = document.getElementById(`life${player}`);
             let currentLife = parseInt(lifeElement.innerText);
             lifeElement.innerText = currentLife + amount;
+
+            if(amount>0)
+            {
+              let sound = new Audio("increase.mp3");
+                sound.play();
+            }
+            else
+            {
+              let sound = new Audio("decrease.mp3");
+                sound.play();
+            }
         }
 
       function resetGame() {
@@ -98,6 +110,8 @@ rotate:180deg}
           if (confirmReset) {
               document.getElementById("life1").innerText = "0";
               document.getElementById("life2").innerText = "0";
+              let sound = new Audio("newgame.mp3");
+                sound.play();
           }
       }
   </script>
