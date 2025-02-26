@@ -1,6 +1,6 @@
 {
-    "name": "City of Gambits - VP tracker",
-    "short_name": "VP tracker",
+    "name": "City of Gambits",
+    "short_name": "City of Gambits",
     "icons": [
       {
         "src": "favicon-192x192.png",
@@ -13,7 +13,7 @@
         "sizes": "512x512"
       }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "background_color": "#000000",
     "display": "standalone"
   }
