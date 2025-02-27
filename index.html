@@ -4,6 +4,8 @@
 
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png">
@@ -40,6 +42,7 @@ background: rgb(2,0,36);
 background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%);
 }
 .life{
+    pointer-events: none;
     position:absolute;
     top:50%;
     left:50%;
@@ -154,6 +157,33 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0
 
     element.style.color = `rgb(${red}, ${green}, ${blue})`;
 }
+
+
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => {
+        console.log('Wake Lock released');
+      });
+    }
+  } catch (err) {
+    console.error('Wake Lock request failed:', err);
+  }
+}
+
+// Request wake lock when the page loads
+document.addEventListener('DOMContentLoaded', requestWakeLock);
+
+// Reacquire wake lock if the page regains focus
+document.addEventListener('visibilitychange', () => {
+  if (wakeLock !== null && document.visibilityState === 'visible') {
+    requestWakeLock();
+  }
+});
+
   </script>
 </body>
 </html>
