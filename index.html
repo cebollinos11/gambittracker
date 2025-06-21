@@ -13,7 +13,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>City of Gambits - Victory Point Tracker</title>
 
   <style>
@@ -197,6 +196,18 @@ document.addEventListener('visibilitychange', () => {
     requestWakeLock();
   }
 });
+
+// Prevent double-tap zoom on mobile devices
+lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = new Date().getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, { 
+  
+  passive: false });
 
   </script>
 </body>
