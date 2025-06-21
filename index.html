@@ -73,6 +73,7 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0
     animation: popAnimation 0.2s ease-out;
 }
 
+
 .modibutton{
   position:relative;
   height:100%;
@@ -98,6 +99,38 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0
             height: 50px;
             opacity: 0.2;
         }
+
+#start-player-arrow {
+        position: fixed;
+        top: 50%;
+        left: 90%;
+        transform: translate(-50%, -50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        color: grey;
+    }
+
+  .version {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8em;
+  color: #888;
+  z-index: 100;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blinking {
+  animation: blink 0.5s step-start infinite;
+}
   </style>
 
   
@@ -121,8 +154,12 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0
     <button class="reset-button" onclick="resetGame()">
       <img src="reset-icon.png" alt="Reset">
   </button>
+  <div id="start-player-arrow">
+    &uarr;	
+    </div>
 </div>
 <audio id="increaseSound" src="coin.mp3"></audio>
+<div class="version">1.2</div>
   <script>
     function changeLife(player, amount) {
             let lifeElement = document.getElementById(`life${player}`);
@@ -155,6 +192,17 @@ background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0
               let sound = new Audio("newgame.mp3");
                 sound.play();
           }
+
+          const arrow = document.getElementById("start-player-arrow");
+          const flip = Math.random() < 0.5;
+          arrow.style.transform = flip ? "translate(-50%, -50%) rotate(180deg)" : "translate(-50%, -50%) rotate(0deg)";   
+          // Add blinking effect
+        arrow.classList.add("blinking");
+
+        // Remove blinking after 3 seconds
+        setTimeout(() => {
+            arrow.classList.remove("blinking");
+        }, 2800);
       }
 
       function updateLifeColor(element, value) {
